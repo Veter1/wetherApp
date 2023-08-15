@@ -12,12 +12,12 @@ const windSpeed = document.getElementsByClassName('windSpeed')[0];
 const pressure = document.getElementsByClassName('pressureData')[0];
 const humidity = document.getElementsByClassName('humidityData')[0];
 
-let city = 'Nova Kakhovka';
+let cityNameEN = 'Nova Kakhovka', cityNameUK = 'Нова Каховка';
 
 // on load app
 window.addEventListener("load", ()=>{
-    if (localStorage.city)
-        city = localStorage.city;
+    if (localStorage.cityNameUK)
+        cityNameUK = localStorage.cityNameUK;
 
     goLoad(true);
 });
@@ -33,15 +33,27 @@ document.addEventListener( 'keyup', event => {
 // start pocess
 async function goLoad(onLoadApp){
     if (!onLoadApp)
-        city = inputField.value;
-        
+        cityNameUK = inputField.value;   
+    
+    // переводимо першібукви назви у верхній регістр
+    let x = cityNameUK.split(' ').filter(i => !!i);
+    cityNameUK = '';
+    for (let i in x){
+        x[i] = x[i].split('');
+        x[i][0] = x[i][0].toUpperCase();
+    }
+    for (let i in x){
+        for (let j in x[i])
+            cityNameUK += x[i][j];
+        cityNameUK += ' ';
+    }
+
     translate();
 }
 
 // translate input value
-async function translate(){
-  
-    var sourceText = 'місто ' + city;
+async function translate(){  
+    var sourceText = 'місто ' + cityNameUK;
     var sourceLang = 'uk';
     var targetLang = 'en';
     
@@ -51,11 +63,8 @@ async function translate(){
     const responseResult = await response.json();
 
     if (response.ok){
-        console.log('responseResult = '+responseResult[0][0][0]+
-        '; after cutting = '+responseResult[0][0][0].replace('the city of ', '').replace("'", "").replace(' city', ''));
-
-        city = responseResult[0][0][0].replace('the city of ', '').replace("'", "").replace(' city', '');
-        inputField.placeholder = '..' + city;
+        cityNameEN = responseResult[0][0][0].replace('the city of ', '').replace("'", "").replace(' city', '');
+        inputField.placeholder = '..' + cityNameUK;
         loadWether();
     } else {
         loadScreen.style = loadScreen.style.cssText + "display: none;";
@@ -69,7 +78,7 @@ async function loadWether(e){
     dataScreen.style = dataScreen.style.cssText + "display: none;";
     loadScreen.style = loadScreen.style.cssText + "display: block;";
 
-    const server = `https://api.openweathermap.org/data/2.5/weather?units=metric&lang=uk&q=${city}&appid=136b1ec47dd48d1e68e52c8f7f017a6d`;
+    const server = `https://api.openweathermap.org/data/2.5/weather?units=metric&lang=uk&q=${cityNameEN}&appid=136b1ec47dd48d1e68e52c8f7f017a6d`;
     const response = await fetch(server, { method: 'GET' });
     const responseResult = await response.json();
 
@@ -86,9 +95,7 @@ async function loadWether(e){
 
 // on accses load - display data
 function displayWether(data){
-    // console.log(data);
-
-    cityName.textContent = city + ' (' + data.sys.country + ')';
+    cityName.textContent = cityNameUK + ' (' + data.sys.country + ')';
     description.textContent = data.weather[0].description;
     temperature.textContent = data.main.temp.toString().slice(0, -1) + '°';
     
@@ -96,12 +103,12 @@ function displayWether(data){
     pressure.textContent = data.main.pressure + ' мм';
     humidity.textContent = data.main.humidity + '%';
 
-    localStorage.setItem('city', city);
+    localStorage.setItem('cityNameUK', cityNameUK);
 }
 
 // on failed load - display msg
 function displayError(msg){
-    if (msg =='city not found'){
+    if (msg =='cityNameEN not found'){
         errorScreen.textContent = 'Невірно введена назва, або такого міста немає в базі :(';
     } else {
         errorScreen.textContent = msg;
