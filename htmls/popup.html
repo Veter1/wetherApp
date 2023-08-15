@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <link rel="icon" type="image/x-icon" href="imgs/icon.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>заголовок сторінки</title>
+</head>
+<body>
+    <div class="inputFieldWrapper">
+        <input type="text" class="inputField">
+        <button class="btnSearch"></button>
+    </div>
+    <section class="data">
+        <div class="cityName"></div>
+        <div class="temperature">
+            <img src="../imgs/temp.svg" alt="temp_icon" class="temperature_img" title="температура">
+            <p class="temperatureText">temperature&deg;</p>
+        </div>
+        <div class="description">description</div>
+        <section class="subData">
+            <div class="wind">
+                <img src="../imgs/wind.svg" alt="wind_img" class="SubDataImg" title="швидкість вітру">
+                <p class="windSpeed">0 м/с</p>
+            </div>
+            <div class="pressure">
+                <img src="../imgs/pressure.svg" alt="pressure_img" class="SubDataImg" title="тиск">
+                <p class="pressureData">0 мм</p>
+            </div>
+            <div class="humidity">
+                <img src="../imgs/humidity.svg" alt="humidity_img" class="SubDataImg" title="вологість повітря">
+                <p class="humidityData">0 %</p>
+            </div>
+        </section>
+    </section>
+    <div class="loadScreen"></div>
+    <div class="errorScreen"></div>
+    <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>

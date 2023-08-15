@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "WetherApp",
+    "description": "розширення для перегляду поточної погоди у будья-кому місті",
+    "version": "1.0",
+    "author": "Kamikoto",
+    "action": {
+        "default_popup": "htmls/popup.html",
+        "default_icon": "imgs/icon.png"
+    },
+    "permissions": [
+        "storage"
+    ]
+}

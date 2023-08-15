@@ -1,0 +1,91 @@
+@charset "UTF-8";
+/* Обнуляющий ксс */
+@import url(null.css);
+
+*{font: italic small-caps 16px cursive}
+
+body{
+    background: url('../imgs/BG.jpg') 0 0/cover no-repeat;
+    width: 300px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    .inputFieldWrapper{
+        flex: 0 1 20%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        .inputField{
+            width: 70%;
+            height: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+        .btnSearch{
+            height: 28px;
+            width: 28px;
+            background: url('../imgs/search.svg') 0 0/28px 28px no-repeat;
+        }
+    }
+    .data{
+        flex: 0 1 80%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        .cityName{ font: italic small-caps bold 20px cursive }
+        .temperature{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            .temperature_img{
+                height: 50px;
+                width: 50px;
+            }
+            .temperatureText{ font: italic small-caps bold 20px cursive }
+        }
+        .description{ font: italic small-caps 18px cursive }
+        .subData{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            .wind, .pressure, .humidity{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                .SubDataImg{
+                    height: 20px;
+                    width: 20px;
+                }
+            }
+
+        }
+        display: none;
+    }
+    .loadScreen{
+        display: none;
+        align-self: center;
+        justify-self: center;
+        flex: 0 1 80%;
+        width: 100%;
+        margin-left: 60%;
+        background: url('../imgs/loading.gif') 0 0/120px 120px no-repeat;
+    }
+    .errorScreen{
+        display: none;
+        align-self: center;
+        justify-self: center;
+        flex: 0 1 80%;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+    }
+}
